@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center" class="pt-3">Memo</h1>
+<ul class="list-group list-group-flush" id="memos">
+	{% for memo in user.memos %}
+	<li class="list-group-item">
+		{{ memo.data }}
+		<button type="button" class="close" onClick="deleteMemo({{ memo.id }})">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</li>
+	{% endfor %}
+</ul>
+<form method="POST">
+	<textarea name="memo" id="memo" class="form-control"></textarea>
+	<br />
+	<div align="center">
+		<button type="submit" class="btn btn-success">Add Memo</button>
+	</div>
+</form>
+<div align="center" class="pt-3">
+	<h1>Submit File</h1>
+	<form method='POST' class='pt-3' enctype='multipart/form-data'>
+		{{form.hidden_tag()}}
+		{{form.file()}}
+		{{form.submit}}
+	</form>
+</div>
+{% endblock %}
